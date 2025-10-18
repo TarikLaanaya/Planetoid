@@ -23,6 +23,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = moveDirection.normalized * maxSpeed; //
+        rb.linearVelocity = moveDirection.normalized * maxSpeed; // Apply movement with max speed
     }
 }

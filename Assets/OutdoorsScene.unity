@@ -709,6 +709,7 @@ GameObject:
   - component: {fileID: 1093223266}
   - component: {fileID: 1093223265}
   - component: {fileID: 1093223267}
+  - component: {fileID: 1093223268}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -769,7 +770,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &1093223267
@@ -786,6 +787,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTranform: {fileID: 1823688467}
   dampening: 200
+--- !u!114 &1093223268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093223263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665c243bdf641174e9313930137c1b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceptInput: 1
 --- !u!1 &1216493721
 GameObject:
   m_ObjectHideFlags: 0

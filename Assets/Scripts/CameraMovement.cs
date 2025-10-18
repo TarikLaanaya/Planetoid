@@ -13,7 +13,7 @@ public class CameraMovement : MonoBehaviour // Rotate the player to always face 
         if (direction != Vector3.zero) // Avoid zero direction (this causes an error when player and camera have the same rotation (look rotation error when vector is zero))
         {
             Quaternion toRotation = Quaternion.LookRotation(direction); // Create a rotation looking in the direction
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, dampening * Time.deltaTime); // Rotate towards that direction with dampening
+            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, dampening * Time.deltaTime); // Rotate towards that direction with dampening
         }
     }
 }

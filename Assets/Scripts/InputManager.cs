@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen (Temporary)
     }
 
     void Update()
