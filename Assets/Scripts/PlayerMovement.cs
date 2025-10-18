@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float maxSpeed;
+    [SerializeField] private float accelDeccel;
     private Rigidbody rb;
     Vector3 moveDirection;
     
@@ -23,6 +24,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = moveDirection.normalized * maxSpeed; // Apply movement with max speed
+        rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, moveDirection.normalized * maxSpeed, accelDeccel); // Apply movement with max speed
     }
 }
