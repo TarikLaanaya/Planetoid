@@ -18,11 +18,11 @@ public class PlayerMovement : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        moveDirection = new Vector3(moveX, 0, moveZ);
+        moveDirection = transform.right * moveX + transform.forward * moveZ; // Calculate movement direction based on player orientation
     }
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(moveDirection.x * maxSpeed, rb.linearVelocity.y, moveDirection.z * maxSpeed); //Set velocity based on input and max speed
+        rb.linearVelocity = moveDirection.normalized * maxSpeed; //
     }
 }
