@@ -23,6 +23,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(moveDirection.x * maxSpeed, rb.linearVelocity.y, moveDirection.z * maxSpeed);
+        rb.linearVelocity = new Vector3(moveDirection.x * maxSpeed, rb.linearVelocity.y, moveDirection.z * maxSpeed); //Set velocity based on input and max speed
     }
 }
