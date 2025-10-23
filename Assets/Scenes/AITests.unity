@@ -167,6 +167,7 @@ MonoBehaviour:
   maxSpeed: 10
   accelDeccel: 2
   playerTransform: {fileID: 690051129}
+  attackDistanceFromPlayer: 10
 --- !u!114 &109915670
 MonoBehaviour:
   m_ObjectHideFlags: 0
