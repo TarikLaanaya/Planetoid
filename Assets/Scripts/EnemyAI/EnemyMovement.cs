@@ -15,12 +15,6 @@ public class EnemyMovement : MonoBehaviour
         enemyAINavigation = GetComponent<EnemyAINavigation>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void FixedUpdate()
     {
         Vector3 dir = enemyAINavigation.TargetDirection(LocationAwayFromPlayer(attackDistanceFromPlayer)); // get direction from EnemyAINavigation using our target
