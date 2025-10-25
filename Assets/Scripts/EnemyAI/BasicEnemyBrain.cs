@@ -19,7 +19,7 @@ public class BasicEnemyBrain : MonoBehaviour
 
     // Public Variables
     [HideInInspector]
-    public Transform playerTransform;
+    public Transform playerRootTransform;
 
     [HideInInspector]
     public Transform enemyBaseTransform;
@@ -38,6 +38,8 @@ public class BasicEnemyBrain : MonoBehaviour
     void Start()
     {
         enemyMovement = GetComponent<EnemyMovement>();
+        enemyMovement.playerRootTransform = playerRootTransform;
+        
         StartPatrol();
     }
 
@@ -46,13 +48,13 @@ public class BasicEnemyBrain : MonoBehaviour
         switch (currentState)
         {
             case EnemyState.Idle:
-                //Idle();
+                Idle();
                 break;
             case EnemyState.Patrol:
                 Patrolling();
                 break;
             case EnemyState.Attack:
-                //Attack();
+                Attacking();
                 break;
         }
     }
@@ -65,6 +67,11 @@ public class BasicEnemyBrain : MonoBehaviour
         currentState = EnemyState.Idle;
         enemyMovement.shouldMove = false;
         StartCoroutine(WaitAndStartNewAction(Random.Range(searchDuration.x, searchDuration.y), StartPatrol));
+    }
+
+    void Idle()
+    {
+        
     }
     
 
@@ -119,29 +126,39 @@ public class BasicEnemyBrain : MonoBehaviour
 
     //------------- ATTACK STATE -------------//
 
-    void Attack()
+    public void StartAttack()
     {
-        enemyMovement.targetPos = LocationAwayFromPlayer(playerTransform.position);
+        currentState = EnemyState.Attack;
+        StopCoroutine("WaitAndStartNewAction"); // Stop any waiting coroutines
         enemyMovement.shouldMove = true;
+        enemyMovement.lookAtPlayer = true;
     }
 
-    Vector3 LocationAwayFromPlayer(Vector3 targetPos) // Find a location a certain distance away from the player
+    void Attacking()
     {
-        Vector3 dirFromPlayer = (transform.position - targetPos).normalized; //get direction
-        targetPos = targetPos + dirFromPlayer * attackDistanceFromPlayer; // create new position from direction and distance
+        enemyMovement.targetPos = LocationAwayFromPlayer(playerRootTransform.position);
+    }
 
-        return targetPos;
+    Vector3 LocationAwayFromPlayer(Vector3 playerPos) // Find a location a certain distance away from the player
+    {
+        Vector3 dirFromPlayer = (transform.position - playerPos).normalized; //get direction
+        playerPos = playerPos + dirFromPlayer * attackDistanceFromPlayer; // create new position from direction and distance
+
+        return playerPos;
     }
 
     //---------- COMMON FUNCTIONS ------------//
     
     IEnumerator WaitAndStartNewAction(float waitTime, System.Action newAction)
     {
-        if (waiting) { Debug.LogError("already waiting"); yield break;} // Prevent multiple coroutines from running (in case we call this from update)
+        if (waiting) { Debug.LogError("already waiting"); yield break; } // Prevent multiple coroutines from running (in case we call this from update)
+        
         waiting = true;
 
         yield return new WaitForSeconds(waitTime);
+
         waiting = false;
-        newAction();
+
+        if (currentState != EnemyState.Attack) { newAction(); } // Only start new action if we are not attacking
     }
 }

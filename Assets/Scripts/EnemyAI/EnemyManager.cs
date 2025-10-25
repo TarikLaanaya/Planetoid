@@ -5,6 +5,7 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject basicEnemyPrefab;
     [SerializeField] private Transform planetTransform;
+    [SerializeField] private Transform playerRootTransform;
 
     [Header("Base Settings")]
     [SerializeField] private int initialEnemyCount;
@@ -47,11 +48,12 @@ public class EnemyManager : MonoBehaviour
             enemy.SetActive(false); // Deactivate enemy until all setup is done
 
             // Set neccessary variables
-            enemy.GetComponent<EnemyAINavigation>().planetTransform = planetTransform;
+            enemy.GetComponent<EnemyMovement>().planetTransform = planetTransform;
             enemy.GetComponent<PlanetGravitySim>().planetTransform = planetTransform;
             enemy.GetComponent<BasicEnemyBrain>().enemyBaseTransform = transform;
             enemy.GetComponent<BasicEnemyBrain>().planetTransform = planetTransform;
             enemy.GetComponent<BasicEnemyBrain>().heightFromPlanetSurface = spawnHeight;
+            enemy.GetComponent<BasicEnemyBrain>().playerRootTransform = playerRootTransform;
 
             enemy.SetActive(true); // Reactivate enemy after setup
             enemiesList.Add(enemy); // Add enemy to list
