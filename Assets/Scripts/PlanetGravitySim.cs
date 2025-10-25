@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PlanetGravitySim : MonoBehaviour
 {
-    [SerializeField] private Transform planetTransform;
+    public Transform planetTransform;
     private float distanceFromPlanetCenter;
 
-    void Awake()
+    void Start()
     {
         distanceFromPlanetCenter = Vector3.Distance(transform.position, planetTransform.position); // Set initial distance from planet center
     }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyAINavigation : MonoBehaviour
 {
-    [SerializeField] private Transform planetTransform;
+    public Transform planetTransform;
 
     public Vector3 TargetDirection(Vector3 targetPosition)
     {
