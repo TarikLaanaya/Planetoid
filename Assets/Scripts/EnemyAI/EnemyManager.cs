@@ -44,7 +44,8 @@ public class EnemyManager : MonoBehaviour
 
     void SpawnEnemies()
     {
-        for (int i = 0; i < initialEnemyCount - enemiesList.Count; i++) // Check if there are any active enemies already spawned and don't exceed initial count
+        int initialCount = enemiesList.Count;
+        for (int i = 0; i < initialEnemyCount - initialCount; i++) // Check if there are any active enemies already spawned and don't exceed initial count
         {
             Vector3 spawnPoint = FindRandomPointFromBase();
 

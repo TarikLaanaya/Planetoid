@@ -51,7 +51,6 @@ public class EnemyMovement : MonoBehaviour //Should rename to EnemyNavigation
         if (lookAtPlayer)
         {
             direction = TargetDirection(playerRootTransform.position); // look directly at target position
-            Debug.Log("Looking directly at target");
         }
         
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), rotationDampening * Time.deltaTime);
