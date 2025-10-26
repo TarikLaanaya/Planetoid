@@ -29,6 +29,8 @@ public class EnemyManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            List<GameObject> tempList = new(); // Create copy of list to avoid modification during iteration (get an error for this otherwise)
+
             foreach (GameObject enemy in enemiesList)
             {
                 bool shouldDestroy = enemy.GetComponent<BasicEnemyBrain>().TooFarFromBase();
@@ -36,8 +38,15 @@ public class EnemyManager : MonoBehaviour
                 if (shouldDestroy)
                 {
                     Destroy(enemy);
-                    enemiesList.Remove(enemy);
+                    tempList.Add(enemy);
+
                 }
+            }
+            
+            // Remove destroyed enemies from main list
+            foreach (GameObject enemy in tempList)
+            {
+                enemiesList.Remove(enemy);
             }
         }
     }
