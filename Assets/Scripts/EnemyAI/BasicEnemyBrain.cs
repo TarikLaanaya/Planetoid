@@ -34,6 +34,7 @@ public class BasicEnemyBrain : MonoBehaviour
     private EnemyMovement enemyMovement;
 
     private bool waiting;
+    private bool chasePlayer;
 
     void Start()
     {
@@ -130,13 +131,28 @@ public class BasicEnemyBrain : MonoBehaviour
     {
         currentState = EnemyState.Attack;
         StopCoroutine("WaitAndStartNewAction"); // Stop any waiting coroutines
+        
         enemyMovement.shouldMove = true;
         enemyMovement.lookAtPlayer = true;
+        chasePlayer = true;
     }
 
     void Attacking()
     {
-        enemyMovement.targetPos = LocationAwayFromPlayer(playerRootTransform.position);
+        if (chasePlayer)
+        {
+            enemyMovement.targetPos = LocationAwayFromPlayer(playerRootTransform.position);
+        }
+        else
+        {
+            enemyMovement.targetPos = transform.position; // Stay in place
+
+            if (Vector3.Distance(transform.position, playerRootTransform.position) > attackDistanceFromPlayer * 2) // If player is too far go back to base
+            {
+                enemyMovement.lookAtPlayer = false;
+                StartPatrol();
+            }
+        }
     }
 
     Vector3 LocationAwayFromPlayer(Vector3 playerPos) // Find a location a certain distance away from the player
@@ -145,6 +161,15 @@ public class BasicEnemyBrain : MonoBehaviour
         playerPos = playerPos + dirFromPlayer * attackDistanceFromPlayer; // create new position from direction and distance
 
         return playerPos;
+    }
+
+    //---------- Destroy Call ------------//
+
+    public bool TooFarFromBase() // Should this enemy be destroyed
+    {
+        chasePlayer = false;
+
+        if (currentState == EnemyState.Attack) { return false; } return true; // Don't destroy if attacking otherwise destroy
     }
 
     //---------- COMMON FUNCTIONS ------------//

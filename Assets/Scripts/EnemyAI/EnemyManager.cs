@@ -24,22 +24,27 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    // Destroy enemies when player exits trigger
+    // Tell enemies when player exits trigger
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             foreach (GameObject enemy in enemiesList)
             {
-                Destroy(enemy);
+                bool shouldDestroy = enemy.GetComponent<BasicEnemyBrain>().TooFarFromBase();
+
+                if (shouldDestroy)
+                {
+                    Destroy(enemy);
+                    enemiesList.Remove(enemy);
+                }
             }
-            enemiesList.Clear();
         }
     }
 
     void SpawnEnemies()
     {
-        for (int i = 0; i < initialEnemyCount; i++)
+        for (int i = 0; i < initialEnemyCount - enemiesList.Count; i++) // Check if there are any active enemies already spawned and don't exceed initial count
         {
             Vector3 spawnPoint = FindRandomPointFromBase();
 
