@@ -7,8 +7,9 @@ public class BasicEnemyBrain : MonoBehaviour
     [Tooltip("Min and max duration the enemy will search for the player before giving up")]
     [SerializeField] private Vector2 searchDuration;
 
-    [Header("Patrol Range From Base")]
+    [Header("Patrol Settings")]
     [SerializeField] private float maxPatrolRange;
+    [SerializeField] LayerMask planetSurfaceLayer;
 
     [Header("Attack Settings")]
     [SerializeField] private float attackDistanceFromPlayer;
@@ -107,10 +108,9 @@ public class BasicEnemyBrain : MonoBehaviour
 
         Vector3 directionToPlanet = (planetTransform.position - patrolPoint).normalized;
 
-        int layerMask = LayerMask.GetMask("PlanetSurface");
         RaycastHit hit;
 
-        if (Physics.Raycast(patrolPoint, directionToPlanet, out hit, Mathf.Infinity, layerMask)) // Find point on planet surface
+        if (Physics.Raycast(patrolPoint, directionToPlanet, out hit, Mathf.Infinity, planetSurfaceLayer)) // Find point on planet surface
         {
             patrolPoint = hit.point;
         }

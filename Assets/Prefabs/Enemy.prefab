@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8236240201710593489}
   - component: {fileID: 5836717745474427213}
   - component: {fileID: 4312669523341539987}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   searchDuration: {x: 2, y: 6}
   maxPatrolRange: 5
+  planetSurfaceLayer:
+    serializedVersion: 2
+    m_Bits: 64
   attackDistanceFromPlayer: 10
   playerRootTransform: {fileID: 0}
   enemyBaseTransform: {fileID: 0}
@@ -128,7 +131,7 @@ GameObject:
   - component: {fileID: 7143969345567520761}
   - component: {fileID: 8869534728608427536}
   - component: {fileID: 58083415076475900}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CollisionAvoidance
   m_TagString: avoidCollider
   m_Icon: {fileID: 0}
@@ -195,7 +198,7 @@ GameObject:
   - component: {fileID: 2730764416059629411}
   - component: {fileID: 3416696270464052023}
   - component: {fileID: 6119436299607915787}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,6 +254,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyBrain: {fileID: 5836717745474427213}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1001 &4562626728978365111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -302,6 +308,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e4a67345ae040204bb65c5a6264c50bf, type: 3}
       propertyPath: m_Name
       value: craft_speederB
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e4a67345ae040204bb65c5a6264c50bf, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5663554932452093724, guid: e4a67345ae040204bb65c5a6264c50bf, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
