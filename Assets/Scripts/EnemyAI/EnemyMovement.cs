@@ -55,7 +55,7 @@ public class EnemyMovement : MonoBehaviour //Should rename to EnemyNavigation
         
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), rotationDampening * Time.deltaTime);
     }
-    
+
     // Find direction to target position along planet surface
     public Vector3 TargetDirection(Vector3 targetPosition)
     {
@@ -64,10 +64,17 @@ public class EnemyMovement : MonoBehaviour //Should rename to EnemyNavigation
 
         // Get the direction between the planet center and the enemy AI (planets surface normal)
         Vector3 planetSurfaceNormal = (transform.position - planetTransform.position).normalized;
-        
+
         // Project the direction to target onto the planet surface normal to get a horizontal direction (essentially deleting the vertical axis)
         Vector3 horizontalDirToTarget = Vector3.ProjectOnPlane(dirToTarget, planetSurfaceNormal).normalized;
 
         return horizontalDirToTarget;
+    }
+    
+    public void MoveAwayFrom(Vector3 target)
+    {
+        Vector3 directionFromTarget = -TargetDirection(target);
+
+        rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, directionFromTarget.normalized * maxSpeed, accelDeccel * Time.deltaTime);
     }
 }
