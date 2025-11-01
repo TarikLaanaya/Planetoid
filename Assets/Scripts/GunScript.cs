@@ -14,6 +14,7 @@ public class GunScript : MonoBehaviour
 
     public bool ChargeShot;
     public float ChargeTimer = 60f;
+    public float BulletSize = 1f;
 
     Animator animator;
     public float DefaultSpinSpeed = 1.0f;
@@ -48,8 +49,9 @@ public class GunScript : MonoBehaviour
                 BarrelSpinFaster();
                 if (Cooldown >= ChargeTimer)
                 {
+                    float BulletScale = 2f;
                     Cooldown = 0f;
-                    Shoot();
+                    ChargeShoot(BulletScale);
                 }
                 else 
                 {
@@ -58,6 +60,11 @@ public class GunScript : MonoBehaviour
             }
             else
             {
+                if (Cooldown > 0f && Cooldown < ChargeTimer)
+                {
+                    float BulletScale = 1f + (Cooldown / ChargeTimer);
+                    ChargeShoot(BulletScale);
+                }
                 animator.speed = 1.0f;
                 Cooldown = 0f;
             }
@@ -69,6 +76,14 @@ public class GunScript : MonoBehaviour
     void Shoot()
     {
         GameObject bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
+    }
+
+    void ChargeShoot(float BulletScale)
+    {
+        GameObject bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
+        bullet.transform.localScale *= BulletScale;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
     }
