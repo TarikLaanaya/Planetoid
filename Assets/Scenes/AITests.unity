@@ -479,7 +479,7 @@ MonoBehaviour:
   basicEnemyPrefab: {fileID: 3780582236066830637, guid: 4f0f8477691a7e740b3408e1b1a0233b, type: 3}
   planetTransform: {fileID: 187782686}
   playerRootTransform: {fileID: 690051129}
-  initialEnemyCount: 3
+  initialEnemyCount: 4
   spawnRadius: 10
   spawnHeight: 3
 --- !u!4 &667288100

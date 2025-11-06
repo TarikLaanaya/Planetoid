@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -65,7 +66,7 @@ public class EnemyManager : MonoBehaviour
             // Set neccessary variables
             enemy.GetComponent<EnemyMovement>().planetTransform = planetTransform;
             enemy.GetComponent<PlanetGravitySim>().planetTransform = planetTransform;
-            enemy.GetComponent<BasicEnemyBrain>().enemyBaseTransform = transform;
+            enemy.GetComponent<BasicEnemyBrain>().enemyBaseGameOBJ = this.gameObject;
             enemy.GetComponent<BasicEnemyBrain>().planetTransform = planetTransform;
             enemy.GetComponent<BasicEnemyBrain>().heightFromPlanetSurface = spawnHeight;
             enemy.GetComponent<BasicEnemyBrain>().playerRootTransform = playerRootTransform;
@@ -90,5 +91,13 @@ public class EnemyManager : MonoBehaviour
         // Size of spawn area
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, spawnRadius);
+    }
+
+    public void PlayerSeenAlert()
+    {
+        foreach(GameObject enemy in enemiesList)
+        {
+            enemy.GetComponent<BasicEnemyBrain>().StartAttack();
+        }
     }
 }

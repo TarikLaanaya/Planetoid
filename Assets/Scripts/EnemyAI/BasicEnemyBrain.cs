@@ -15,15 +15,18 @@ public class BasicEnemyBrain : MonoBehaviour
     [SerializeField] private float attackDistanceFromPlayer;
 
     // Enemy States
-    private enum EnemyState { Idle, Patrol, Attack }
-    private EnemyState currentState;
+    [HideInInspector]
+    public enum EnemyState { Idle, Patrol, Attack }
+
+    [HideInInspector]
+    public EnemyState currentState;
 
     // Public Variables
     [HideInInspector]
     public Transform playerRootTransform;
 
     [HideInInspector]
-    public Transform enemyBaseTransform;
+    public GameObject enemyBaseGameOBJ;
 
     [HideInInspector]
     public Transform planetTransform;
@@ -100,6 +103,8 @@ public class BasicEnemyBrain : MonoBehaviour
     {
         float randomRangeX = Random.Range(-maxPatrolRange, maxPatrolRange);
         float randomRangeZ = Random.Range(-maxPatrolRange, maxPatrolRange);
+
+        Transform enemyBaseTransform = enemyBaseGameOBJ.transform;
 
         // Set patrol point in random direction from enemy base
         Vector3 patrolPoint = enemyBaseTransform.position + (enemyBaseTransform.right * randomRangeX + enemyBaseTransform.forward * randomRangeZ + enemyBaseTransform.up * 5f);
