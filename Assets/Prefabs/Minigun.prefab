@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 36094a5d81cb64348a526385a57af93c, type: 3}
       propertyPath: m_Name
-      value: MinigunNoAnimations
+      value: Minigun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -148,17 +148,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b8f7ae5f3c94044a15d98d7794c145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetTransform: {fileID: 0}
   BulletSpawn: {fileID: 6396511724879848277}
   BulletPrefab: {fileID: 0}
   BulletSpeed: 50
-  TimeBetweenShots: 0.2
+  TimeBetweenShots: 0.3
   delay: 0
   ChargeShot: 0
-  ChargeTimer: 60
+  ChargeTimer: 500
   BulletSize: 1
   DefaultSpinSpeed: 1
   MaxSpinSpeed: 10
   IsGun2: 0
+  gatlingClip: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
+  chargingClip: {fileID: 8300000, guid: 8dcd4df83fa700d4ab35d0a021656d2b, type: 3}
+  chargeShotClip: {fileID: 8300000, guid: c8e33fcd643e5d649a62264dd7230acc, type: 3}
+  GatlingAudio: {fileID: 8024830825982378630, guid: adb42f69eafc7f5429bf3e5031a3f950, type: 3}
+  ChargingAudio: {fileID: 4118018691921647873, guid: 356b07e760aabc4498a05c6542f5e231, type: 3}
+  ChargeShotAudio: {fileID: 6525593658770886601, guid: c06d46ed72960c54fb227488c8a1371f, type: 3}
+  pitchVariance: 0.5
 --- !u!4 &7543236728754429305 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 36094a5d81cb64348a526385a57af93c, type: 3}

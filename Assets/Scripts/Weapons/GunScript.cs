@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class GunScript : MonoBehaviour
 {
@@ -29,15 +30,39 @@ public class GunScript : MonoBehaviour
 
     public bool IsGun2;
 
+    [Header ("Audio")]
+    [SerializeField] private AudioClip gatlingClip;
+    [SerializeField] private AudioClip chargingClip;
+    [SerializeField] private AudioClip chargeShotClip;
+    [SerializeField] private AudioSource GatlingAudio;
+    [SerializeField] private AudioSource ChargingAudio;
+    [SerializeField] private AudioSource ChargeShotAudio;
+    [SerializeField] private float pitchVariance = 0.5f;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
 
         delayTime = delay;
+
+        GatlingAudio.enabled = true;
+        ChargingAudio.enabled = true;
+        ChargeShotAudio.enabled = true;
     }
 
-    void FixedUpdate()
+    void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ChargeShot = false;
+            Debug.Log("Gatling Mode");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ChargeShot = true;
+            Debug.Log("Charge Shot Mode");
+        }
+
         if (!ChargeShot)    // Gatling shooting mode
         {
             Cooldown -= Time.deltaTime;
@@ -65,6 +90,10 @@ public class GunScript : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space))
             {
+                if (!ChargingAudio.isPlaying)
+                {
+                    ChargingAudio.PlayOneShot(chargingClip);
+                }
                 BarrelSpinFaster();
                 if (Cooldown >= ChargeTimer)
                 {
@@ -75,10 +104,11 @@ public class GunScript : MonoBehaviour
                 else 
                 {
                     Cooldown += 1;
-                } 
+                }
             }
             else
             {
+                ChargingAudio.Stop();
                 if (Cooldown > 0f && Cooldown < ChargeTimer)
                 {
                     float BulletScale = 1f * (Cooldown / ChargeTimer);
@@ -104,7 +134,15 @@ public class GunScript : MonoBehaviour
         bullet.GetComponent<PlanetGravitySim>().planetTransform = planetTransform;
         rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
         Destroy(bullet, 2f);
+
+        float randomPitch = Random.Range(1f - pitchVariance, 1f + pitchVariance);
+        float randomVolume = Random.Range(0.4f, 6f);
+        GatlingAudio.pitch = randomPitch;
+        GatlingAudio.volume = randomVolume;
+        GatlingAudio.PlayOneShot(gatlingClip);
+
     }
+
 
     void ChargeShoot(float BulletScale)
     {
@@ -116,6 +154,9 @@ public class GunScript : MonoBehaviour
         rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
         bullet.tag = "ChargeBullet";
         Destroy(bullet, 6.7f);
+        ChargingAudio.Stop();
+        ChargeShotAudio.PlayOneShot(chargeShotClip);
+
     }
 
     void BarrelSpinFaster()
