@@ -11,6 +11,9 @@ public class GunScript : MonoBehaviour
     public float BulletSpeed = 20f;
     public float TimeBetweenShots = 0.5f;
     private float Cooldown = 0f;
+    [SerializeField] private float delay = 0f;
+    private float delayTime = 0f;
+    bool alreadyShot = false;
 
     public bool ChargeShot;
     public float ChargeTimer = 60f;
@@ -20,29 +23,41 @@ public class GunScript : MonoBehaviour
     public float DefaultSpinSpeed = 1.0f;
     public float MaxSpinSpeed = 10.0f;
 
+    public bool IsGun2;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
+
+        delayTime = delay;
     }
 
     void FixedUpdate()
     {
-        if (!ChargeShot)
+        if (!ChargeShot)    // Gatling shooting mode
         {
             Cooldown -= Time.deltaTime;
-
-            if (Input.GetKey(KeyCode.Space) && Cooldown <= 0f)
+            delayTime -= Time.deltaTime;
+            if (Input.GetKey(KeyCode.Space))
             {
                 BarrelSpinFaster();
-                Shoot();
-                Cooldown = TimeBetweenShots;
+                if (Cooldown <= 0f && delayTime <= 0f)
+                {
+                    Shoot();
+                    Cooldown = TimeBetweenShots;
+
+                    if(alreadyShot) delayTime = 0f;
+                    else delayTime = delay;
+
+                }
+                alreadyShot = true;
             }
             else
             {
                 animator.speed = 1.0f;
             }
         }
-        else
+        if (ChargeShot)     // Charge shot mode
         {
             if (Input.GetKey(KeyCode.Space))
             {
@@ -70,8 +85,13 @@ public class GunScript : MonoBehaviour
             }
             
         }
-        
-     }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            alreadyShot = false;
+        }
+
+    }
 
     void Shoot()
     {
@@ -97,6 +117,5 @@ public class GunScript : MonoBehaviour
             animator.speed += 0.1f;
         }
     }
-
 }
 

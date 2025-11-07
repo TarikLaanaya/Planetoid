@@ -486,11 +486,13 @@ MonoBehaviour:
   BulletPrefab: {fileID: 1735584645}
   BulletSpeed: 50
   TimeBetweenShots: 0.2
-  ChargeShot: 1
+  delay: 0.5
+  ChargeShot: 0
   ChargeTimer: 60
   BulletSize: 1
   DefaultSpinSpeed: 1
   MaxSpinSpeed: 10
+  IsGun2: 0
 --- !u!95 &739503520
 Animator:
   serializedVersion: 7
@@ -741,12 +743,14 @@ MonoBehaviour:
   BulletSpawn: {fileID: 670678340}
   BulletPrefab: {fileID: 1735584645}
   BulletSpeed: 50
-  TimeBetweenShots: 0.23
-  ChargeShot: 1
+  TimeBetweenShots: 0.2
+  delay: 0
+  ChargeShot: 0
   ChargeTimer: 60
   BulletSize: 1
   DefaultSpinSpeed: 1
   MaxSpinSpeed: 10
+  IsGun2: 0
 --- !u!4 &1083171684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 36094a5d81cb64348a526385a57af93c, type: 3}
