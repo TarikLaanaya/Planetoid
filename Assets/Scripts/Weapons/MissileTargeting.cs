@@ -10,19 +10,18 @@ public class MissileTargeting : MonoBehaviour
     public float ConeAngle = 30f;
     public float Range = 50f;
 
+    [SerializeField] private float MissileCooldown = 4f;
+    [SerializeField] public float Cooldown = 0f;
+
     public bool LockedOn = false;
     GameObject Target;
     public GameObject Missile;
     public Transform MissileSpawn;
 
-    void FixedUpdate()
+    void Update()
     { 
-        if (!LockedOn)
-        { 
-            FindEnemy();
-        }
-
-        if(targetedEnemy != null)
+        Cooldown -= Time.deltaTime;
+        if (targetedEnemy != null)
         {
             if (!LockedOn)
             {
@@ -32,11 +31,21 @@ public class MissileTargeting : MonoBehaviour
             else
             {
                 checkStillInRange(targetedEnemy);
-                if (Input.GetKeyUp(KeyCode.B))
+                if (Input.GetKeyDown(KeyCode.B) && Cooldown <= 0f)
                 {
+                    Debug.Log("Missile Fired");
                     ShootMissile();
+                    Cooldown = MissileCooldown;
                 }
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!LockedOn)
+        {
+            FindEnemy();
         }
     }
 

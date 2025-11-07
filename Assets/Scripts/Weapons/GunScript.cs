@@ -36,7 +36,7 @@ public class GunScript : MonoBehaviour
         delayTime = delay;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!ChargeShot)    // Gatling shooting mode
         {
