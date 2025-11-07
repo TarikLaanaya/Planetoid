@@ -29,6 +29,15 @@ public class EnemyHealth : MonoBehaviour
                 TakeDamage(4);
                 Destroy(other.gameObject);
                 break;
+            case "ChargeBullet":
+                int damage = other.gameObject.transform.localScale.x switch
+                {
+                    >= 3f => 50,
+                    >= 2f => 30,
+                    _ => 1,
+                };
+                TakeDamage(damage);
+                break;
         }
 
     }

@@ -20,7 +20,7 @@ public class GunScript : MonoBehaviour
     bool alreadyShot = false;
 
     public bool ChargeShot;
-    public float ChargeTimer = 60f;
+    public float ChargeTimer = 200f;
     public float BulletSize = 1f;
 
     Animator animator;
@@ -36,7 +36,7 @@ public class GunScript : MonoBehaviour
         delayTime = delay;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (!ChargeShot)    // Gatling shooting mode
         {
@@ -68,7 +68,7 @@ public class GunScript : MonoBehaviour
                 BarrelSpinFaster();
                 if (Cooldown >= ChargeTimer)
                 {
-                    float BulletScale = 2f;
+                    float BulletScale = 1f * (Cooldown / ChargeTimer); 
                     Cooldown = 0f;
                     ChargeShoot(BulletScale);
                 }
@@ -81,7 +81,7 @@ public class GunScript : MonoBehaviour
             {
                 if (Cooldown > 0f && Cooldown < ChargeTimer)
                 {
-                    float BulletScale = 1f + (Cooldown / ChargeTimer);
+                    float BulletScale = 1f * (Cooldown / ChargeTimer);
                     ChargeShoot(BulletScale);
                 }
                 animator.speed = 1.0f;
@@ -109,10 +109,13 @@ public class GunScript : MonoBehaviour
     void ChargeShoot(float BulletScale)
     {
         GameObject bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
+        bullet.transform.localScale = 1f * Vector3.one;
         bullet.transform.localScale *= BulletScale;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        bullet.GetComponent<PlanetGravitySim>().planetTransform = planetTransform;
         rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
-        Destroy(bullet, 2f);
+        bullet.tag = "ChargeBullet";
+        Destroy(bullet, 6.7f);
     }
 
     void BarrelSpinFaster()

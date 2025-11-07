@@ -953,6 +953,22 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
+      propertyPath: IsGun2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
+      propertyPath: BulletSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
+      propertyPath: ChargeShot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
+      propertyPath: ChargeTimer
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
       propertyPath: BulletPrefab
       value: 
       objectReference: {fileID: 2376115530242943323, guid: d5b93f5d07ab8fb4f962f5f1cfa85f28, type: 3}
@@ -962,7 +978,7 @@ PrefabInstance:
       objectReference: {fileID: 187782686}
     - target: {fileID: 7198200786690901955, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
       propertyPath: m_Name
-      value: Minigun
+      value: Minigun Left
       objectReference: {fileID: 0}
     - target: {fileID: 7543236728754429305, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
       propertyPath: m_LocalScale.x
@@ -1397,6 +1413,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 665399583}
     m_Modifications:
     - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
+      propertyPath: BulletSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
+      propertyPath: ChargeShot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
+      propertyPath: ChargeTimer
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
       propertyPath: BulletPrefab
       value: 
       objectReference: {fileID: 2376115530242943323, guid: d5b93f5d07ab8fb4f962f5f1cfa85f28, type: 3}
@@ -1406,7 +1434,7 @@ PrefabInstance:
       objectReference: {fileID: 187782686}
     - target: {fileID: 7198200786690901955, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
       propertyPath: m_Name
-      value: Minigun (1)
+      value: Minigun Right
       objectReference: {fileID: 0}
     - target: {fileID: 7543236728754429305, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
       propertyPath: m_LocalScale.x
