@@ -34,6 +34,8 @@ public class EnemyManager : MonoBehaviour
 
             foreach (GameObject enemy in enemiesList)
             {
+                if (enemy == null) continue; // Skip if enemy has been destroyed
+
                 bool shouldDestroy = enemy.GetComponent<BasicEnemyBrain>().TooFarFromBase();
 
                 if (shouldDestroy)
@@ -97,6 +99,8 @@ public class EnemyManager : MonoBehaviour
     {
         foreach(GameObject enemy in enemiesList)
         {
+            if (enemy == null) continue; // Skip if enemy has been destroyed
+
             enemy.GetComponent<BasicEnemyBrain>().StartAttack();
         }
     }

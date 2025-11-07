@@ -36,9 +36,12 @@ public class MissileTargeting : MonoBehaviour
                     Debug.Log("Missile Fired");
                     ShootMissile();
                     Cooldown = MissileCooldown;
+                    targetedEnemy = null;
+                    LockedOn = false;
                 }
             }
         }
+        else FindEnemy();
     }
 
     private void FixedUpdate()

@@ -32,7 +32,7 @@ public class AICollisionAvoidance : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (colliding)
+        if (colliding && target != null)
         {
             enemyMovement.MoveAwayFrom(target.transform.position);
         }

@@ -470,6 +470,8 @@ MonoBehaviour:
   targetedEnemy: {fileID: 0}
   ConeAngle: 30
   Range: 50
+  MissileCooldown: 4
+  Cooldown: 0
   LockedOn: 0
   Missile: {fileID: 9170018711817894333, guid: f24b64c47be39c8478d16e4fe8e912ef, type: 3}
   MissileSpawn: {fileID: 1070213636}
@@ -506,7 +508,7 @@ MonoBehaviour:
   basicEnemyPrefab: {fileID: 3780582236066830637, guid: 4f0f8477691a7e740b3408e1b1a0233b, type: 3}
   planetTransform: {fileID: 187782686}
   playerRootTransform: {fileID: 690051129}
-  initialEnemyCount: 4
+  initialEnemyCount: 1
   spawnRadius: 10
   spawnHeight: 3
 --- !u!4 &667288100
