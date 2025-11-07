@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class GunScript : MonoBehaviour
 {
+    [Header ("Planet Transform")]
+    [SerializeField]
+    private Transform planetTransform;
+
     [SerializeField]
     private Transform BulletSpawn;
     [SerializeField]
@@ -97,6 +101,7 @@ public class GunScript : MonoBehaviour
     {
         GameObject bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        bullet.GetComponent<PlanetGravitySim>().planetTransform = planetTransform;
         rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
         Destroy(bullet, 2f);
     }

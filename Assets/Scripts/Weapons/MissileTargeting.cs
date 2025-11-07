@@ -31,6 +31,7 @@ public class MissileTargeting : MonoBehaviour
             }
             else
             {
+                checkStillInRange(targetedEnemy);
                 if (Input.GetKeyUp(KeyCode.B))
                 {
                     ShootMissile();
@@ -90,6 +91,19 @@ public class MissileTargeting : MonoBehaviour
         //Using Vector3.Angle, the angle between the player's forward direction and the direction to the enemy is found and compared to the cone angle.
         //If both the angle and distance checks pass, the enemy is added to the new list
         //Finally, the closest enemy from the enemiesInCone list is determined and returned as the TargetedEnemy.
+    }
+
+    void checkStillInRange(Transform targetedEnemy)
+    {
+        float distance = Vector3.Distance(transform.position, targetedEnemy.transform.position);
+        Vector3 directionToEnemy = (targetedEnemy.transform.position - transform.position).normalized;
+        float angleToEnemy = Vector3.Angle(transform.forward, directionToEnemy);
+        float distanceToEnemy = Vector3.Distance(transform.position, targetedEnemy.transform.position);
+        if (angleToEnemy > ConeAngle / 2 || distanceToEnemy > Range)
+        {
+            LockedOn = false;
+            targetedEnemy = null;
+        }
     }
 
     void LockOn(Transform targetedEnemy)
