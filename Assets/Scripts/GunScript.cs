@@ -78,7 +78,7 @@ public class GunScript : MonoBehaviour
         GameObject bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
-        bullet.deleteAfterSeconds(2f);
+        Destroy(bullet, 2f);
     }
 
     void ChargeShoot(float BulletScale)
@@ -87,7 +87,7 @@ public class GunScript : MonoBehaviour
         bullet.transform.localScale *= BulletScale;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
-        bullet.deleteAfterSeconds(2f);
+        Destroy(bullet, 2f);
     }
 
     void BarrelSpinFaster()
