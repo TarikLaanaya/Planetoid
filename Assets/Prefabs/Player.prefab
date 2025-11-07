@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433a84c5bbfd457479e6860c837d4142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: 15
   accelDeccel: 2
   rotationDampening: 7
   playerModelTransform: {fileID: 4985513091207706937}

@@ -338,8 +338,8 @@ Transform:
   m_GameObject: {fileID: 1165033938}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1105, y: 942, z: 1965}
-  m_LocalScale: {x: 132.13966, y: 132.13966, z: 132.13966}
+  m_LocalPosition: {x: -828, y: 825, z: 1222}
+  m_LocalScale: {x: 69.08526, y: 69.08526, z: 69.08526}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2046229432}
@@ -473,11 +473,11 @@ MonoBehaviour:
   moonPhaseRotation: 360
   earthshine: 1
   flareSize: 1.5
-  flareTint: {r: 1, g: 1, b: 1, a: 1}
+  flareTint: {r: 0.9294118, g: 0.8941177, b: 0.9058824, a: 1}
   flareFalloff: 4
   flareMultiplier: 0.191
   surfaceTexture: {fileID: 0}
-  surfaceTint: {r: 1, g: 0.73708427, b: 0.0990566, a: 1}
+  surfaceTint: {r: 0.9294118, g: 0.8941177, b: 0.9058824, a: 1}
   m_Distance: 1.5e+11
   m_UseRayTracedShadows: 0
   m_NumRayTracingSamples: 4
@@ -547,7 +547,7 @@ MonoBehaviour:
   m_ShadowVariant: 0
   m_ShadowPrecision: 0
   useOldInspector: 0
-  useVolumetric: 1
+  useVolumetric: 0
   featuresFoldout: 1
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
@@ -567,7 +567,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9294118, g: 0.837, b: 0.9058824, a: 1}
   m_Intensity: 130000
   m_Range: 10
   m_SpotAngle: 30
@@ -630,13 +630,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194641643}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
+  m_LocalRotation: {x: 0.13866632, y: -0.8729585, z: 0.07336783, w: 0.46187907}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2035884287}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 14.844, y: -125.591, z: -10.39}
 --- !u!1001 &1242483054
 PrefabInstance:
   m_ObjectHideFlags: 0

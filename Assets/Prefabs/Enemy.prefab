@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa89dcfb7ce034f4baf6733a04cbdd43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: 14
   accelDeccel: 2
   rotationDampening: 7
   shouldMove: 0
@@ -103,8 +103,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   attackDistanceFromPlayer: 10
+  currentState: 0
   playerRootTransform: {fileID: 0}
-  enemyBaseTransform: {fileID: 0}
+  enemyBaseGameOBJ: {fileID: 0}
   planetTransform: {fileID: 0}
   heightFromPlanetSurface: 0
 --- !u!114 &4312669523341539987
