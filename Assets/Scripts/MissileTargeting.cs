@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MissileTargeting : MonoBehaviour
 {
-    public Transform TargetedEnemy;
+    public Transform targetedEnemy;
 
     [Header("Cone Settings")]
     public float ConeAngle = 30f;
@@ -19,21 +19,21 @@ public class MissileTargeting : MonoBehaviour
     { 
         if (!LockedOn)
         { 
-        FindEnemy();
+            FindEnemy();
         }
 
-        if(TargetedEnemy != null)
+        if(targetedEnemy != null)
         {
             if (!LockedOn)
             {
-                LockOn(TargetedEnemy);
+                LockOn(targetedEnemy);
                 LockedOn = true;
             }
             else
             {
                 if (Input.GetKeyUp(KeyCode.B))
                 {
-                    ShootMissile(Target);
+                    ShootMissile();
                 }
             }
         }
@@ -44,11 +44,11 @@ public class MissileTargeting : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemies == null || enemies.Length == 0)
         {
-            TargetedEnemy = null;
+            targetedEnemy = null;
             return;
         }
 
-        TargetedEnemy = ConeCheck(enemies);
+        targetedEnemy = ConeCheck(enemies);
     }
     //FindEnemy finds all enemies in the room and adds them to a list. 
     //ConeCheck is then called if the list is not Null, which acts as a minor optimisation for when no enemies are present.
@@ -94,14 +94,14 @@ public class MissileTargeting : MonoBehaviour
 
     void LockOn(Transform targetedEnemy)
     {
-        GameObject Target = targetedEnemy.gameObject;
+        GameObject target = targetedEnemy.gameObject;
     }
 
-    void ShootMissile(GameObject Target)
+    void ShootMissile()
     {
         GameObject missile = Instantiate(Missile, MissileSpawn.position, MissileSpawn.rotation);
 
-        missile.GetComponent<HomingMissile>().target = Target.transform;
+        missile.GetComponent<HomingMissile>().target = targetedEnemy.gameObject.transform;
     }
 
 }
