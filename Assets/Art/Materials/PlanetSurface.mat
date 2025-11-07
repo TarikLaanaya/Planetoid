@@ -163,6 +163,9 @@ Material:
     - _BlendMode: 0
     - _CoatMask: 0
     - _ConservativeDepthOffsetEnable: 0
+    - _CrackScale: 3319.7
+    - _CracksDisplacement: 0.007
+    - _CracksNormalStrength: 1
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
@@ -210,6 +213,7 @@ Material:
     - _MetallicRemapMax: 1
     - _MetallicRemapMin: 0
     - _MountainScale: 864.7
+    - _NoiseNormalStrength: 0.1
     - _NoiseScale: 300000
     - _NormalMapSpace: 0
     - _NormalScale: 1
