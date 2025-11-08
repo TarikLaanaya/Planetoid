@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchDuration: {x: 2, y: 6}
-  maxPatrolRange: 5
+  maxPatrolRange: 6
   planetSurfaceLayer:
     serializedVersion: 2
     m_Bits: 64

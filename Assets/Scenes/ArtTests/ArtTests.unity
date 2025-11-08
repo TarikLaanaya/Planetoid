@@ -177,6 +177,10 @@ PrefabInstance:
       value: EnemyBase
       objectReference: {fileID: 0}
     - target: {fileID: 4625658127755089045, guid: 7f0f0c76843f529449d3f1cdab8a8866, type: 3}
+      propertyPath: spawnRadius
+      value: 16.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625658127755089045, guid: 7f0f0c76843f529449d3f1cdab8a8866, type: 3}
       propertyPath: planetTransform
       value: 
       objectReference: {fileID: 66839024}
@@ -304,11 +308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4985513091207706937, guid: c116b13fb49065448b9c520f3974541a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 441.78
+      value: 444.5
       objectReference: {fileID: 0}
     - target: {fileID: 8345995428670652777, guid: c116b13fb49065448b9c520f3974541a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 441.78
+      value: 444.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

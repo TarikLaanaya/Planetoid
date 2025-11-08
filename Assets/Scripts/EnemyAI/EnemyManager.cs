@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject basicEnemyPrefab;
     [SerializeField] private Transform planetTransform;
     [SerializeField] private Transform playerRootTransform;
+    [SerializeField] LayerMask planetSurfaceLayer;
 
     [Header("Base Settings")]
     [SerializeField] private int initialEnemyCount;
@@ -81,7 +82,28 @@ public class EnemyManager : MonoBehaviour
         float randRadiusX = Random.Range(-spawnRadius, spawnRadius);
         float randRadiusZ = Random.Range(-spawnRadius, spawnRadius);
 
-        Vector3 spawnPoint = transform.position + (transform.right * randRadiusX + transform.forward * randRadiusZ + transform.up * spawnHeight);
+        Vector3 posOnGround;
+
+        #region FindGround
+
+        Vector3 directionToPlanet = (planetTransform.position - transform.position).normalized;
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, directionToPlanet, out hit, Mathf.Infinity, planetSurfaceLayer)) // Find point on planet surface
+        {
+            posOnGround = hit.point;
+        }
+        else
+        {
+            Debug.LogError("EnemyManager: planet surface not found");
+            posOnGround = transform.position;
+        }
+
+        #endregion
+
+        // Find a point in a random direction at a set height
+        Vector3 spawnPoint = posOnGround + (transform.right * randRadiusX + transform.forward * randRadiusZ + transform.up * spawnHeight);
 
         return spawnPoint;
     }
