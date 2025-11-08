@@ -6,12 +6,15 @@ using UnityEngine.EventSystems;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float maxSpeed;
+    [SerializeField] private float boostSpeed;
+    [SerializeField] private ParticleSystem[] boostParticles;
     [SerializeField] private float accelDeccel;
     [SerializeField] private float rotationDampening;
     [SerializeField] private Transform playerModelTransform;
     
     private Rigidbody rb;
     Vector3 moveDirection;
+    private bool boosting = false;
     
     void Start()
     {
@@ -28,12 +31,34 @@ public class PlayerMovement : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
 
         transform.Rotate(Vector3.up * mouseX); // Rotate player root based on mouse movement
-        
+
+        // Check if boost button down
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            boosting = true;
+            SetParticleSystemActive(true);
+        }
+        else
+        {
+            boosting = false;
+            SetParticleSystemActive(false);
+        }
     }
 
     void FixedUpdate()
     {
-        rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, moveDirection.normalized * maxSpeed, accelDeccel * Time.deltaTime); // Apply movement with max speed
+        // --- Boost --- //
+
+        Vector3 boostMagnitude = Vector3.zero; // Set default value
+
+        if (boosting)
+        {
+            boostMagnitude = playerModelTransform.forward * boostSpeed; // If we are boosting add a boost magnitude to the main movement logic
+        }
+
+        // --- Movement --- //
+        
+        rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, moveDirection.normalized * maxSpeed + boostMagnitude, accelDeccel * Time.deltaTime); // Apply movement with max speed
     }
 
     void LateUpdate() //We do this in late update to prevent jittering with unsynced player root and model
@@ -42,5 +67,13 @@ public class PlayerMovement : MonoBehaviour
         playerModelTransform.rotation = Quaternion.Slerp(playerModelTransform.rotation, transform.rotation, rotationDampening * Time.deltaTime);
 
         playerModelTransform.position = transform.position; // Sync player model to player root
+    }
+
+    void SetParticleSystemActive(bool active)
+    {
+        foreach (ParticleSystem boostParticle in boostParticles)
+        {
+            boostParticle.gameObject.SetActive(active);
+        }
     }
 }
