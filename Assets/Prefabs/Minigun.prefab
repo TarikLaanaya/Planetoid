@@ -309,6 +309,7 @@ MonoBehaviour:
   planetTransform: {fileID: 0}
   BulletSpawn: {fileID: 6396511724879848277}
   BulletPrefab: {fileID: 2376115530242943323, guid: d5b93f5d07ab8fb4f962f5f1cfa85f28, type: 3}
+  chargeBulletPrefab: {fileID: 0}
   BulletSpeed: 50
   TimeBetweenShots: 0.25
   delay: 0
@@ -321,9 +322,8 @@ MonoBehaviour:
   gatlingClip: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
   chargingClip: {fileID: 8300000, guid: 8dcd4df83fa700d4ab35d0a021656d2b, type: 3}
   chargeShotClip: {fileID: 8300000, guid: c8e33fcd643e5d649a62264dd7230acc, type: 3}
-  GatlingAudio: {fileID: 0}
-  ChargingAudio: {fileID: 0}
-  ChargeShotAudio: {fileID: 0}
+  chargeFailClip: {fileID: 8300000, guid: 7acd1faffed18b640b55d2a514fa1baa, type: 3}
+  gunAudioSource: {fileID: 0}
   pitchVariance: 0.5
 --- !u!1 &7556111080534811878
 GameObject:

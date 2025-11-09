@@ -36,6 +36,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] private AudioClip gatlingClip;
     [SerializeField] private AudioClip chargingClip;
     [SerializeField] private AudioClip chargeShotClip;
+    [SerializeField] private AudioClip chargeFailClip;
     [SerializeField] private AudioSource gunAudioSource;
     [SerializeField] private float pitchVariance = 0.5f;
 
@@ -114,7 +115,18 @@ public class GunScript : MonoBehaviour
                 if (Cooldown > 0f && Cooldown < ChargeTimer)
                 {
                     float BulletScale = 1f * (Cooldown / ChargeTimer);
-                    ChargeShoot(BulletScale);
+                    if (BulletScale > .5f) ChargeShoot(BulletScale);
+                    else
+                    {
+                        float timeStamp = gunAudioSource.time;
+                        gunAudioSource.Stop();
+                        gunAudioSource.clip = null;
+                        gunAudioSource.clip = chargeFailClip;
+                        gunAudioSource.pitch = -1.2f;
+                        gunAudioSource.volume = .4f;
+                        gunAudioSource.time = timeStamp;
+                        gunAudioSource.Play();
+                    }
                 }
                 animator.speed = 1.0f;
                 Cooldown = 0f;
@@ -158,7 +170,7 @@ public class GunScript : MonoBehaviour
         bullet.GetComponent<PlanetGravitySim>().planetTransform = planetTransform;
         rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
         bullet.tag = "ChargeBullet";
-        bullet.GetComponent<Bullet>().damage = Mathf.Lerp(1f, 25f, BulletScale);
+        bullet.GetComponent<Bullet>().damage = Mathf.Lerp(0f, 25f, BulletScale);
         Destroy(bullet, 6.7f);
 
         gunAudioSource.Stop();
