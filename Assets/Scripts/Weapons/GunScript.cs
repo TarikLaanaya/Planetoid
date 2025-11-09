@@ -12,6 +12,7 @@ public class GunScript : MonoBehaviour
     private Transform BulletSpawn;
     [SerializeField]
     private GameObject BulletPrefab;
+    [SerializeField] private GameObject chargeBulletPrefab;
 
     public float BulletSpeed = 20f;
     public float TimeBetweenShots = 0.5f;
@@ -34,9 +35,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] private AudioClip gatlingClip;
     [SerializeField] private AudioClip chargingClip;
     [SerializeField] private AudioClip chargeShotClip;
-    [SerializeField] private AudioSource GatlingAudio;
-    [SerializeField] private AudioSource ChargingAudio;
-    [SerializeField] private AudioSource ChargeShotAudio;
+    [SerializeField] private AudioSource gunAudioSource;
     [SerializeField] private float pitchVariance = 0.5f;
 
     private void Start()
@@ -44,10 +43,6 @@ public class GunScript : MonoBehaviour
         animator = GetComponent<Animator>();
 
         delayTime = delay;
-
-        GatlingAudio.enabled = true;
-        ChargingAudio.enabled = true;
-        ChargeShotAudio.enabled = true;
     }
 
     void Update()
@@ -90,11 +85,18 @@ public class GunScript : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                if (!ChargingAudio.isPlaying)
+                if (gunAudioSource.clip != chargingClip)
                 {
-                    ChargingAudio.PlayOneShot(chargingClip);
+                    gunAudioSource.Stop();
+                    gunAudioSource.pitch = 1.2f;
+                    gunAudioSource.volume = .4f;
+
+                    gunAudioSource.clip = chargingClip;
+                    gunAudioSource.Play();
                 }
+
                 BarrelSpinFaster();
+                
                 if (Cooldown >= ChargeTimer)
                 {
                     float BulletScale = 1f * (Cooldown / ChargeTimer); 
@@ -103,12 +105,11 @@ public class GunScript : MonoBehaviour
                 }
                 else 
                 {
-                    Cooldown += 1;
+                    Cooldown += Time.deltaTime * 100;
                 }
             }
             else
             {
-                ChargingAudio.Stop();
                 if (Cooldown > 0f && Cooldown < ChargeTimer)
                 {
                     float BulletScale = 1f * (Cooldown / ChargeTimer);
@@ -123,6 +124,7 @@ public class GunScript : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             alreadyShot = false;
+            delayTime = delay;
         }
 
     }
@@ -135,18 +137,19 @@ public class GunScript : MonoBehaviour
         rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
         Destroy(bullet, 2f);
 
+        // Audio
         float randomPitch = Random.Range(1f - pitchVariance, 1f + pitchVariance);
-        float randomVolume = Random.Range(0.4f, 6f);
-        GatlingAudio.pitch = randomPitch;
-        GatlingAudio.volume = randomVolume;
-        GatlingAudio.PlayOneShot(gatlingClip);
+        float randomVolume = Random.Range(0.4f, 1f);
+        gunAudioSource.pitch = randomPitch;
+        gunAudioSource.volume = randomVolume;
+        gunAudioSource.PlayOneShot(gatlingClip);
 
     }
 
 
     void ChargeShoot(float BulletScale)
     {
-        GameObject bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
+        GameObject bullet = Instantiate(chargeBulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
         bullet.transform.localScale = 1f * Vector3.one;
         bullet.transform.localScale *= BulletScale;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
@@ -154,8 +157,11 @@ public class GunScript : MonoBehaviour
         rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
         bullet.tag = "ChargeBullet";
         Destroy(bullet, 6.7f);
-        ChargingAudio.Stop();
-        ChargeShotAudio.PlayOneShot(chargeShotClip);
+
+        gunAudioSource.Stop();
+        gunAudioSource.clip = null;
+        gunAudioSource.volume = BulletScale % .5f;
+        gunAudioSource.PlayOneShot(chargeShotClip);
 
     }
 
@@ -167,4 +173,3 @@ public class GunScript : MonoBehaviour
         }
     }
 }
-
