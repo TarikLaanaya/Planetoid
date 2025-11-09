@@ -24,6 +24,7 @@ public class GunScript : MonoBehaviour
     public bool ChargeShot;
     public float ChargeTimer = 200f;
     public float BulletSize = 1f;
+    private bool chargeFired = false;
 
     Animator animator;
     public float DefaultSpinSpeed = 1.0f;
@@ -83,11 +84,10 @@ public class GunScript : MonoBehaviour
         }
         if (ChargeShot)     // Charge shot mode
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) && !chargeFired)
             {
                 if (gunAudioSource.clip != chargingClip)
                 {
-                    gunAudioSource.Stop();
                     gunAudioSource.pitch = 1.2f;
                     gunAudioSource.volume = .4f;
 
@@ -99,6 +99,7 @@ public class GunScript : MonoBehaviour
                 
                 if (Cooldown >= ChargeTimer)
                 {
+                    chargeFired = true;
                     float BulletScale = 1f * (Cooldown / ChargeTimer); 
                     Cooldown = 0f;
                     ChargeShoot(BulletScale);
@@ -125,6 +126,7 @@ public class GunScript : MonoBehaviour
         {
             alreadyShot = false;
             delayTime = delay;
+            chargeFired = false;
         }
 
     }
@@ -160,9 +162,8 @@ public class GunScript : MonoBehaviour
 
         gunAudioSource.Stop();
         gunAudioSource.clip = null;
-        gunAudioSource.volume = BulletScale % .5f;
+        gunAudioSource.volume = Mathf.Clamp(BulletScale, .3f, .5f);
         gunAudioSource.PlayOneShot(chargeShotClip);
-
     }
 
     void BarrelSpinFaster()

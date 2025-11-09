@@ -503,7 +503,7 @@ MonoBehaviour:
   basicEnemyPrefab: {fileID: 3780582236066830637, guid: 4f0f8477691a7e740b3408e1b1a0233b, type: 3}
   planetTransform: {fileID: 187782686}
   playerRootTransform: {fileID: 690051129}
-  initialEnemyCount: 1
+  initialEnemyCount: 5
   spawnRadius: 10
   spawnHeight: 3
 --- !u!4 &667288100
@@ -980,8 +980,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.685
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1469,6 +1469,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
+      propertyPath: gunAudioSource
+      value: 
+      objectReference: {fileID: 1172078999}
+    - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
       propertyPath: ChargeShotAudio
       value: 
       objectReference: {fileID: 0}
@@ -1565,6 +1569,10 @@ PrefabInstance:
       propertyPath: ChargingAudio
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
+      propertyPath: gunAudioSource
+      value: 
+      objectReference: {fileID: 1172078999}
     - target: {fileID: 5229678074513095772, guid: 2994ad3227cc22343a0578b5e8a1e4ba, type: 3}
       propertyPath: ChargeShotAudio
       value: 
