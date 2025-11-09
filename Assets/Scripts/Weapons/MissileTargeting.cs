@@ -31,7 +31,7 @@ public class MissileTargeting : MonoBehaviour
             else
             {
                 checkStillInRange(targetedEnemy);
-                if (Input.GetKeyDown(KeyCode.B) && Cooldown <= 0f)
+                if (Input.GetKeyDown(KeyCode.Alpha3) && Cooldown <= 0f)
                 {
                     Debug.Log("Missile Fired");
                     ShootMissile();

@@ -158,6 +158,7 @@ public class GunScript : MonoBehaviour
         bullet.GetComponent<PlanetGravitySim>().planetTransform = planetTransform;
         rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
         bullet.tag = "ChargeBullet";
+        bullet.GetComponent<Bullet>().damage = Mathf.Lerp(1f, 25f, BulletScale);
         Destroy(bullet, 6.7f);
 
         gunAudioSource.Stop();

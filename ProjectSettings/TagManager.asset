@@ -9,6 +9,7 @@ TagManager:
   - Missile
   - GatlingBullet
   - ChargeBullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
