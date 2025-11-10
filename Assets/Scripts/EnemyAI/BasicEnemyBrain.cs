@@ -32,7 +32,7 @@ public class BasicEnemyBrain : MonoBehaviour
     public Transform planetTransform;
 
     [HideInInspector]
-    public float heightFromPlanetSurface;
+    public float startHeightFromPlanetSurface;
 
     // Script References
     private EnemyMovement enemyMovement;
@@ -91,11 +91,24 @@ public class BasicEnemyBrain : MonoBehaviour
 
     void Patrolling()
     {
-        float distanceToTarget = Vector3.Distance(transform.position, enemyMovement.targetPos + (transform.up * heightFromPlanetSurface));
+        // Get planet radius by getting the component radius and multiplying it by the local scale in case it isnt equal to 1,1,1 (which it isnt)
+        float planetRadius = planetTransform.GetComponent<SphereCollider>().radius * planetTransform.localScale.x;
+        
+        // Get distance from planet surface by subtracting the distance between the enemy position and planet centre with the planet radius
+        float targetHeightFromPlanetSurface = Vector3.Distance(transform.position, planetTransform.position) - planetRadius;
 
-        if (distanceToTarget < 1f) // If we reached our patrol point
+        Vector3 normalFromSurface = (enemyMovement.targetPos - planetTransform.position).normalized;
+
+        // Get the distance to the target location accounting for the height
+        float distanceToTarget = Vector3.Distance(transform.position, enemyMovement.targetPos + (normalFromSurface * targetHeightFromPlanetSurface));
+
+        if (distanceToTarget < 3f) // If we reached our patrol point
         {
             StartIdle();
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, enemyMovement.targetPos + (normalFromSurface * targetHeightFromPlanetSurface) - transform.position, Color.cyan);
         }
     }
 
@@ -163,9 +176,9 @@ public class BasicEnemyBrain : MonoBehaviour
     Vector3 LocationAwayFromPlayer(Vector3 playerPos) // Find a location a certain distance away from the player
     {
         Vector3 dirFromPlayer = (transform.position - playerPos).normalized; //get direction
-        playerPos = playerPos + dirFromPlayer * attackDistanceFromPlayer; // create new position from direction and distance
+        Vector3 targetPos = playerPos + dirFromPlayer * attackDistanceFromPlayer; // create new position from direction and distance
 
-        return playerPos;
+        return targetPos;
     }
 
     //---------- Destroy Call ------------//

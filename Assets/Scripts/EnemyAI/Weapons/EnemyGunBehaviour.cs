@@ -6,7 +6,7 @@ public class EnemyGunBehaviour : MonoBehaviour
     [SerializeField] private float distanceBeforeShoot = 20f;
     [SerializeField] private Transform BulletSpawn;
     [SerializeField] private GameObject BulletPrefab;
-    [SerializeField] private float BulletSpeed = 20f;
+    [SerializeField] private float BulletSpeed;
     [SerializeField] private float TimeBetweenShots = 0.5f;
 
     [Header("Audio")]
@@ -42,6 +42,10 @@ public class EnemyGunBehaviour : MonoBehaviour
             GameObject bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             bullet.GetComponent<PlanetGravitySim>().planetTransform = basicEnemyBrain.planetTransform;
+
+            Vector3 dirToPlayer = basicEnemyBrain.playerRootTransform.position - BulletSpawn.position;
+            BulletSpawn.rotation = Quaternion.LookRotation(dirToPlayer);
+
             rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
             Destroy(bullet, 2f);
 

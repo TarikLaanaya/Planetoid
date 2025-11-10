@@ -306,6 +306,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b8f7ae5f3c94044a15d98d7794c145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shotPitchSens: 0.06
+  playerVerticalAim: {fileID: 0}
+  playerCam: {fileID: 0}
   planetTransform: {fileID: 0}
   BulletSpawn: {fileID: 6396511724879848277}
   BulletPrefab: {fileID: 2376115530242943323, guid: d5b93f5d07ab8fb4f962f5f1cfa85f28, type: 3}

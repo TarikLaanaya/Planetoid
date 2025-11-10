@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6976592533462896578}
   - component: {fileID: 1826634956384805429}
   - component: {fileID: -4738053238063048656}
-  - component: {fileID: -5663452344624025074}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: GatlingBullet
@@ -151,16 +150,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 4
---- !u!114 &-5663452344624025074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376115530242943323}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c70f3740adf5e4abc9477b716d180e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planetTransform: {fileID: 0}

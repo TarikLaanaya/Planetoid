@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 
 public class GunScript : MonoBehaviour
 {
-    public float shotPitchSens;
+    [SerializeField] private float shotPitchSens;
     [SerializeField] private PlayerVerticalAim playerVerticalAim;
     [SerializeField] private Camera playerCam;
 
@@ -158,7 +158,6 @@ public class GunScript : MonoBehaviour
         Vector3 dir = Quaternion.AngleAxis(-pitch, playerCam.transform.right) * playerCam.transform.forward;
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        bullet.GetComponent<PlanetGravitySim>().planetTransform = planetTransform;
         rb.linearVelocity = dir * BulletSpeed;
         Destroy(bullet, 2f);
 
@@ -175,11 +174,17 @@ public class GunScript : MonoBehaviour
     void ChargeShoot(float BulletScale)
     {
         GameObject bullet = Instantiate(chargeBulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
+
+        // Multiply the position of the crosshair by the desired sensitivity
+        float pitch = playerVerticalAim.crosshairTransform.anchoredPosition.y * shotPitchSens;
+
+        // Rotate pitch amount around the "X axis" and then multiply by forward to get the desired direction
+        Vector3 dir = Quaternion.AngleAxis(-pitch, playerCam.transform.right) * playerCam.transform.forward;
+
         bullet.transform.localScale = 1f * Vector3.one;
         bullet.transform.localScale *= BulletScale;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        bullet.GetComponent<PlanetGravitySim>().planetTransform = planetTransform;
-        rb.linearVelocity = BulletSpawn.forward * BulletSpeed;
+        rb.linearVelocity = dir * BulletSpeed;
         bullet.tag = "ChargeBullet";
         bullet.GetComponent<Bullet>().damage = Mathf.Lerp(0f, 25f, BulletScale);
         Destroy(bullet, 6.7f);

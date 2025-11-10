@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlanetGravitySim : MonoBehaviour
+public class PlanetGravitySim : MonoBehaviour // DO NOT USE ON PLAYER BULLETS
 {
     public Transform planetTransform;
     private float distanceFromPlanetCenter;

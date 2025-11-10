@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8236240201710593489}
   - component: {fileID: 5836717745474427213}
   - component: {fileID: 4312669523341539987}
-  - component: {fileID: 6464613601886289920}
   - component: {fileID: 8523147965851334290}
+  - component: {fileID: 8612804444211277727}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -102,16 +102,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchDuration: {x: 2, y: 6}
-  maxPatrolRange: 5
+  maxPatrolRange: 10
   planetSurfaceLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackDistanceFromPlayer: 10
+  attackDistanceFromPlayer: 20
   currentState: 0
   playerRootTransform: {fileID: 0}
   enemyBaseGameOBJ: {fileID: 0}
   planetTransform: {fileID: 0}
-  heightFromPlanetSurface: 0
+  startHeightFromPlanetSurface: 0
 --- !u!114 &4312669523341539987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +125,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetTransform: {fileID: 0}
---- !u!82 &6464613601886289920
+--- !u!114 &8523147965851334290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3780582236066830637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5978f03ab5ee4784bbb5b22bd58e296f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceBeforeShoot: 30
+  BulletSpawn: {fileID: 6463461828040826643}
+  BulletPrefab: {fileID: 2376115530242943323, guid: dd756535ef10ec243a82edfa261a5d0a, type: 3}
+  BulletSpeed: 20
+  TimeBetweenShots: 0.5
+  gatlingClip: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
+--- !u!82 &8612804444211277727
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,24 +240,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8523147965851334290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3780582236066830637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5978f03ab5ee4784bbb5b22bd58e296f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceBeforeShoot: 20
-  BulletSpawn: {fileID: 6463461828040826643}
-  BulletPrefab: {fileID: 2376115530242943323, guid: dd756535ef10ec243a82edfa261a5d0a, type: 3}
-  BulletSpeed: 20
-  TimeBetweenShots: 0.5
-  gatlingClip: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
 --- !u!1 &3971667423869530486
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,8 @@ public class EnemyManager : MonoBehaviour
     [Header("Base Settings")]
     [SerializeField] private int initialEnemyCount;
     [SerializeField] private float spawnRadius;
-    [SerializeField] private float spawnHeight;
+    [SerializeField] private float spawnHeightMin;
+    [SerializeField] private float spawnHeightMax;
 
     private List<GameObject> enemiesList = new();
 
@@ -70,7 +71,7 @@ public class EnemyManager : MonoBehaviour
             enemy.GetComponent<PlanetGravitySim>().planetTransform = planetTransform;
             enemy.GetComponent<BasicEnemyBrain>().enemyBaseGameOBJ = this.gameObject;
             enemy.GetComponent<BasicEnemyBrain>().planetTransform = planetTransform;
-            enemy.GetComponent<BasicEnemyBrain>().heightFromPlanetSurface = spawnHeight;
+            enemy.GetComponent<BasicEnemyBrain>().startHeightFromPlanetSurface = Random.Range(spawnHeightMin, spawnHeightMax);
             enemy.GetComponent<BasicEnemyBrain>().playerRootTransform = playerRootTransform;
 
             enemy.SetActive(true); // Reactivate enemy after setup
@@ -83,7 +84,7 @@ public class EnemyManager : MonoBehaviour
         float randRadiusX = Random.Range(-spawnRadius, spawnRadius);
         float randRadiusZ = Random.Range(-spawnRadius, spawnRadius);
 
-        Vector3 spawnPoint = transform.position + (transform.right * randRadiusX + transform.forward * randRadiusZ + transform.up * spawnHeight);
+        Vector3 spawnPoint = transform.position + (transform.right * randRadiusX + transform.forward * randRadiusZ + transform.up * Random.Range(spawnHeightMin, spawnHeightMax));
 
         return spawnPoint;
     }
