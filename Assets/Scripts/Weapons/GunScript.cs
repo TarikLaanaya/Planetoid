@@ -63,6 +63,8 @@ public class GunScript : MonoBehaviour
             Debug.Log("Charge Shot Mode");
         }
 
+        //Allows the player to switch between weapons using 1 and 2.
+
         if (!ChargeShot)    // Gatling shooting mode
         {
             Cooldown -= Time.deltaTime;
