@@ -4,7 +4,6 @@ using UnityEngine.Audio;
 
 public class GunScript : MonoBehaviour
 {
-    [SerializeField] private float shotPitchSens;
     [SerializeField] private PlayerVerticalAim playerVerticalAim;
     [SerializeField] private Camera playerCam;
 
@@ -146,18 +145,13 @@ public class GunScript : MonoBehaviour
             delayTime = delay;
             chargeFired = false;
         }
-
     }
 
     void Shoot()
     {
         GameObject bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
 
-        // Multiply the position of the crosshair by the desired sensitivity
-        float pitch = playerVerticalAim.crosshairTransform.anchoredPosition.y * shotPitchSens;
-
-        // Rotate pitch amount around the "X axis" and then multiply by forward to get the desired direction
-        Vector3 dir = Quaternion.AngleAxis(-pitch, playerCam.transform.right) * playerCam.transform.forward;
+        Vector3 dir = GetShootDir();
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = dir * BulletSpeed;
@@ -177,11 +171,7 @@ public class GunScript : MonoBehaviour
     {
         GameObject bullet = Instantiate(chargeBulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
 
-        // Multiply the position of the crosshair by the desired sensitivity
-        float pitch = playerVerticalAim.crosshairTransform.anchoredPosition.y * shotPitchSens;
-
-        // Rotate pitch amount around the "X axis" and then multiply by forward to get the desired direction
-        Vector3 dir = Quaternion.AngleAxis(-pitch, playerCam.transform.right) * playerCam.transform.forward;
+        Vector3 dir = GetShootDir();
 
         bullet.transform.localScale = 1f * Vector3.one;
         bullet.transform.localScale *= BulletScale;
@@ -199,9 +189,49 @@ public class GunScript : MonoBehaviour
 
     void BarrelSpinFaster()
     {
-        if(animator.speed < MaxSpinSpeed)
+        if (animator.speed < MaxSpinSpeed)
         {
             animator.speed += 0.1f;
         }
+    }
+    
+    Vector3 GetShootDir()
+    {
+        // --- Vertical Aim Logic --- ///
+
+        // Multiply the position of the crosshair by the desired sensitivity
+        //float pitch = playerVerticalAim.crosshairTransform.anchoredPosition.y * shotPitchSens;
+
+        // Rotate pitch amount around the "X axis" and then multiply by forward to get the desired direction
+        //Vector3 dir = Quaternion.AngleAxis(-pitch, playerCam.transform.right) * playerCam.transform.forward;
+
+
+        Vector3 crosshairScreenPosition = playerCam.WorldToScreenPoint(playerVerticalAim.crosshairTransform.position);
+
+        Ray ray = playerCam.ScreenPointToRay(crosshairScreenPosition);
+        RaycastHit hit;
+        Vector3 rayTargetPoint;
+
+        if (Physics.Raycast(ray, out hit, 999f))
+        {
+            if (hit.collider.tag == "Enemy")
+            {
+                rayTargetPoint = hit.point;
+            }
+            else
+            {
+                rayTargetPoint = ray.GetPoint(999f);
+            }
+        }
+        else
+        {
+            rayTargetPoint = ray.GetPoint(999f);
+        }
+
+        Vector3 dir = (rayTargetPoint - BulletSpawn.position).normalized;
+
+        return dir;
+            
+        // -------------------------- ///
     }
 }

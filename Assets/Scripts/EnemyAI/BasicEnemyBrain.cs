@@ -106,10 +106,6 @@ public class BasicEnemyBrain : MonoBehaviour
         {
             StartIdle();
         }
-        else
-        {
-            Debug.DrawRay(transform.position, enemyMovement.targetPos + (normalFromSurface * targetHeightFromPlanetSurface) - transform.position, Color.cyan);
-        }
     }
 
     Vector3 FindPatrolPoint()

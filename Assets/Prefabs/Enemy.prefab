@@ -102,11 +102,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchDuration: {x: 2, y: 6}
-  maxPatrolRange: 10
+  maxPatrolRange: 15
   planetSurfaceLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackDistanceFromPlayer: 20
+  attackDistanceFromPlayer: 35
   currentState: 0
   playerRootTransform: {fileID: 0}
   enemyBaseGameOBJ: {fileID: 0}
