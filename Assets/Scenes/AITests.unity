@@ -304,6 +304,50 @@ MonoBehaviour:
   lowerLimit: -100
   moveSpeed: 700
   crosshairTransform: {fileID: 1232037629}
+--- !u!114 &690051141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690051128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433a84c5bbfd457479e6860c837d4142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 0
+  accelDeccel: 0
+  rotationDampening: 0
+  playerModelTransform: {fileID: 910444563}
+--- !u!4 &910444563 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4985513091207706937, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+  m_PrefabInstance: {fileID: 7138280122099168215}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &952487220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5282321408415767616, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+  m_PrefabInstance: {fileID: 7138280122099168215}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &952487224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952487220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3045cb69c76487c48903cc5e1f30de52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starship: {fileID: 690051129}
+  baseOffset: {x: 0, y: 3, z: -6}
+  smoothSpeed: 0.1
+  speedOffsetMultiplier: 0.5
+  horizontalMoveAmount: 0.5
+  horizontalSmoothSpeed: 5
 --- !u!1 &960562438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,6 +1101,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5542062547592936603, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      propertyPath: m_UpdateMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5768106514208631555, guid: c116b13fb49065448b9c520f3974541a, type: 3}
       propertyPath: testSens
       value: 0.07
@@ -1080,6 +1128,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 698206866751171569, guid: c116b13fb49065448b9c520f3974541a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 690051135}
+    - targetCorrespondingSourceObject: {fileID: 698206866751171569, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 690051141}
+    - targetCorrespondingSourceObject: {fileID: 5282321408415767616, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 952487224}
   m_SourcePrefab: {fileID: 100100000, guid: c116b13fb49065448b9c520f3974541a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
