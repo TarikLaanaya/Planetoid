@@ -175,6 +175,7 @@ public class GunScript : MonoBehaviour
         bullet.transform.localScale *= BulletScale;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = dir * BulletSpeed;
+        bullet.transform.rotation = Quaternion.LookRotation(dir);
         bullet.tag = "ChargeBullet";
         bullet.GetComponent<Bullet>().damage = Mathf.Lerp(0f, 25f, BulletScale);
         Destroy(bullet, 6.7f);
@@ -210,7 +211,7 @@ public class GunScript : MonoBehaviour
         RaycastHit hit;
         Vector3 rayTargetPoint;
 
-        if (Physics.Raycast(ray, out hit, 999f))
+        if (Physics.Raycast(ray, out hit, 100f))
         {
             if (hit.collider.tag == "Enemy")
             {
@@ -218,7 +219,7 @@ public class GunScript : MonoBehaviour
             }
             else
             {
-                rayTargetPoint = ray.GetPoint(999f);
+                rayTargetPoint = ray.GetPoint(100f);
             }
         }
         else
