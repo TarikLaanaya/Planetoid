@@ -798,14 +798,6 @@ PrefabInstance:
       propertyPath: planetTransform
       value: 
       objectReference: {fileID: 187782686}
-    - target: {fileID: 905538207841605018, guid: c116b13fb49065448b9c520f3974541a, type: 3}
-      propertyPath: enemyLayer.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 905538207841605018, guid: c116b13fb49065448b9c520f3974541a, type: 3}
-      propertyPath: planetSurfaceLayer.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 3278655056885808246, guid: c116b13fb49065448b9c520f3974541a, type: 3}
       propertyPath: planetTransform
       value: 
@@ -854,18 +846,6 @@ PrefabInstance:
       propertyPath: planetTransform
       value: 
       objectReference: {fileID: 187782686}
-    - target: {fileID: 5768106514208631555, guid: c116b13fb49065448b9c520f3974541a, type: 3}
-      propertyPath: enemyLayer.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 5768106514208631555, guid: c116b13fb49065448b9c520f3974541a, type: 3}
-      propertyPath: planetSurfaceLayer.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 8414760827070295490, guid: c116b13fb49065448b9c520f3974541a, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
