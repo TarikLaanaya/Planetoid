@@ -7,30 +7,37 @@ public class PlayerVerticalAim : MonoBehaviour
     public float lowerLimit = -200f;
     public float moveSpeed = 10f;
 
+    private float targetHorizontalOffset = 0f;
+    private float currentHorizontalOffset = 0f;
+    public float horizontalMovement = 50f; // UI units to move left/right
+    public float horizontalSmoothSpeed = 5f;
+    public float smoothSpeed = 0.1f;
+
     public RectTransform crosshairTransform;
     float currentY;
 
     void Start()
     {
-        
+        if (crosshairTransform != null)
+        {
+            currentY = crosshairTransform.anchoredPosition.y;
+            currentHorizontalOffset = crosshairTransform.anchoredPosition.x;
+        }
     }
 
     void Update()
     {
+        // Vertical mouse movement
         float mouseY = Input.GetAxis("Mouse Y");
-
-        // Add to currentY depending on MouseY positive/negative * the sensitivity (moveSpeed) independent of framerate (Time.deltatime)
         currentY += mouseY * moveSpeed * Time.deltaTime;
-
-        // Limit currentY to the upper and lower limit
         currentY = Mathf.Clamp(currentY, lowerLimit, upperLimit);
 
-        // Set crosshair position to current Y (ignore x because we only move vertically). Use lerp to make it move smoothly
-        crosshairTransform.anchoredPosition = Vector2.Lerp(crosshairTransform.anchoredPosition,  new Vector2(0f, currentY), Time.deltaTime * 10f);
-    }
-
-    public Vector3 GetCrosshairPos()
-    {
-        return crosshairTransform.position; //position in 3d space
+        float horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = -horizontalInput;
+        float targetOffsetX = horizontalInput * horizontalMovement;
+        currentHorizontalOffset = Mathf.Lerp(currentHorizontalOffset, targetOffsetX, Time.deltaTime * horizontalSmoothSpeed);
+        // Apply the smoothed position to the crosshair
+        Vector2 targetPosition = new Vector2(currentHorizontalOffset, currentY);
+        crosshairTransform.anchoredPosition = Vector2.Lerp(crosshairTransform.anchoredPosition, targetPosition, Time.deltaTime * 10f);
     }
 }
