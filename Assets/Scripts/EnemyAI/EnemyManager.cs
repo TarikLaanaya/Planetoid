@@ -7,12 +7,12 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject basicEnemyPrefab;
     [SerializeField] private Transform planetTransform;
     [SerializeField] private Transform playerRootTransform;
-    [SerializeField] LayerMask planetSurfaceLayer;
 
     [Header("Base Settings")]
     [SerializeField] private int initialEnemyCount;
     [SerializeField] private float spawnRadius;
-    [SerializeField] private float spawnHeight;
+    [SerializeField] private float spawnHeightMin;
+    [SerializeField] private float spawnHeightMax;
 
     private List<GameObject> enemiesList = new();
 
@@ -35,6 +35,8 @@ public class EnemyManager : MonoBehaviour
 
             foreach (GameObject enemy in enemiesList)
             {
+                if (enemy == null) continue; // Skip if enemy has been destroyed
+
                 bool shouldDestroy = enemy.GetComponent<BasicEnemyBrain>().TooFarFromBase();
 
                 if (shouldDestroy)
@@ -69,7 +71,7 @@ public class EnemyManager : MonoBehaviour
             enemy.GetComponent<PlanetGravitySim>().planetTransform = planetTransform;
             enemy.GetComponent<BasicEnemyBrain>().enemyBaseGameOBJ = this.gameObject;
             enemy.GetComponent<BasicEnemyBrain>().planetTransform = planetTransform;
-            enemy.GetComponent<BasicEnemyBrain>().heightFromPlanetSurface = spawnHeight;
+            enemy.GetComponent<BasicEnemyBrain>().startHeightFromPlanetSurface = Random.Range(spawnHeightMin, spawnHeightMax);
             enemy.GetComponent<BasicEnemyBrain>().playerRootTransform = playerRootTransform;
 
             enemy.SetActive(true); // Reactivate enemy after setup
@@ -82,28 +84,7 @@ public class EnemyManager : MonoBehaviour
         float randRadiusX = Random.Range(-spawnRadius, spawnRadius);
         float randRadiusZ = Random.Range(-spawnRadius, spawnRadius);
 
-        Vector3 posOnGround;
-
-        #region FindGround
-
-        Vector3 directionToPlanet = (planetTransform.position - transform.position).normalized;
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, directionToPlanet, out hit, Mathf.Infinity, planetSurfaceLayer)) // Find point on planet surface
-        {
-            posOnGround = hit.point;
-        }
-        else
-        {
-            Debug.LogError("EnemyManager: planet surface not found");
-            posOnGround = transform.position;
-        }
-
-        #endregion
-
-        // Find a point in a random direction at a set height
-        Vector3 spawnPoint = posOnGround + (transform.right * randRadiusX + transform.forward * randRadiusZ + transform.up * spawnHeight);
+        Vector3 spawnPoint = transform.position + (transform.right * randRadiusX + transform.forward * randRadiusZ + transform.up * Random.Range(spawnHeightMin, spawnHeightMax));
 
         return spawnPoint;
     }
@@ -119,6 +100,8 @@ public class EnemyManager : MonoBehaviour
     {
         foreach(GameObject enemy in enemiesList)
         {
+            if (enemy == null) continue; // Skip if enemy has been destroyed
+
             enemy.GetComponent<BasicEnemyBrain>().StartAttack();
         }
     }
