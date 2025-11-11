@@ -4,12 +4,14 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 100;
+    [SerializeField] private GameObject explosionPrefab;
+
     private float health;
     [SerializeField] GameObject enemyParent;
 
     void Start()
     {
-        
+        health = maxHealth;
     }
 
     void Update()
@@ -46,8 +48,8 @@ public class EnemyHealth : MonoBehaviour
 
     void TakeDamage(float damage)
     {
-        maxHealth -= damage;
-        if (maxHealth <= 0)
+        health -= damage;
+        if (health <= 0)
         {
             Die();
         }
@@ -55,7 +57,8 @@ public class EnemyHealth : MonoBehaviour
     
     void Die()
     {
-        //Explosion animation
+        Instantiate(explosionPrefab, transform.position, transform.rotation);
+        
         Destroy(enemyParent);
     }
 }

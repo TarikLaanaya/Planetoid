@@ -720,7 +720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1751465592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,10 +798,6 @@ PrefabInstance:
       propertyPath: planetTransform
       value: 
       objectReference: {fileID: 187782686}
-    - target: {fileID: 905538207841605018, guid: c116b13fb49065448b9c520f3974541a, type: 3}
-      propertyPath: crosshairTargetDistance
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3278655056885808246, guid: c116b13fb49065448b9c520f3974541a, type: 3}
       propertyPath: planetTransform
       value: 
@@ -850,9 +846,9 @@ PrefabInstance:
       propertyPath: planetTransform
       value: 
       objectReference: {fileID: 187782686}
-    - target: {fileID: 5768106514208631555, guid: c116b13fb49065448b9c520f3974541a, type: 3}
-      propertyPath: crosshairTargetDistance
-      value: 10
+    - target: {fileID: 8414760827070295490, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
