@@ -18,6 +18,8 @@ public class MissileTargeting : MonoBehaviour
     public GameObject Missile;
     public Transform MissileSpawn;
 
+    public HUDManager hudManager;
+
     void Update()
     { 
         Cooldown -= Time.deltaTime;
@@ -126,7 +128,7 @@ public class MissileTargeting : MonoBehaviour
     void ShootMissile()
     {
         GameObject missile = Instantiate(Missile, MissileSpawn.position, MissileSpawn.rotation);
-
+        hudManager.MissileCooldown();
         missile.GetComponent<HomingMissile>().target = targetedEnemy.gameObject.transform;
     }
 
