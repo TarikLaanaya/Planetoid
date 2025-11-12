@@ -1,21 +1,23 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class EnemyHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 100;
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private GameObject playerModel;
+
+    [Header("Restart After Death Settings")]
+    [SerializeField] private float restartDelay = 4f;
+    [SerializeField] private InputManager inputManager;
 
     private float health;
-    [SerializeField] GameObject enemyParent;
-    private EnemyManager enemyManager;
+    private bool dead = false;
 
     void Start()
     {
         health = maxHealth;
-
-        enemyManager = enemyParent.GetComponent<BasicEnemyBrain>().enemyBaseGameOBJ.GetComponent<EnemyManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,18 +31,12 @@ public class EnemyHealth : MonoBehaviour
 
         switch (other.gameObject.tag)
         {
-            case "Missile":
-                TakeDamage(100);
+            case "EnemyBullet":
+                TakeDamage(damage);
                 Destroy(other.gameObject);
                 break;
 
-            case "GatlingBullet":
-                TakeDamage(damage);
-                Destroy(other.gameObject);
-                break;
-            case "ChargeBullet":
-                TakeDamage(damage);
-                break;
+            // Add other cases for different bullets (when/if added)
         }
 
     }
@@ -48,24 +44,29 @@ public class EnemyHealth : MonoBehaviour
     void TakeDamage(float damage)
     {
         health -= damage;
-        if (health <= 0)
+        if (health <= 0 && !dead)
         {
             Die();
-        }
-
-        if (enemyParent.GetComponent<BasicEnemyBrain>().currentState != BasicEnemyBrain.EnemyState.Attack)
-        {
-            enemyManager.PlayerSeenAlert();
         }
     }
 
     void Die()
     {
+        inputManager.acceptInput = false;
+
+        dead = true;
+
         Instantiate(explosionPrefab, transform.position, transform.rotation);
 
-        enemyManager.winCondition.EnemyDestroyed();
+        playerModel.SetActive(false);
 
-        Destroy(enemyParent);
+        StartCoroutine(RestartSceneAfterDelay(restartDelay));
+    }
+    
+    IEnumerator RestartSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
