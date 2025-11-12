@@ -106,7 +106,7 @@ MonoBehaviour:
   planetSurfaceLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackDistanceFromPlayer: 35
+  attackDistanceFromPlayer: 20
   currentState: 0
   playerRootTransform: {fileID: 0}
   enemyBaseGameOBJ: {fileID: 0}
@@ -164,7 +164,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 17.1
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -200,7 +200,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 2730764416059629411}
   - component: {fileID: 3416696270464052023}
   - component: {fileID: 6119436299607915787}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: PlayerDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,6 +377,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &7634608995231842834
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,8 +392,8 @@ GameObject:
   - component: {fileID: 7022898774843805695}
   - component: {fileID: 7045631039004626292}
   m_Layer: 7
-  m_Name: BulletCollision
-  m_TagString: Untagged
+  m_Name: DamageCollision(Health)
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -444,6 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  explosionPrefab: {fileID: 1329845292236604, guid: 888a1b3a3c103c8448f82212f801f221, type: 3}
   enemyParent: {fileID: 3780582236066830637}
 --- !u!1 &8113068471980607848
 GameObject:
@@ -454,7 +458,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6463461828040826643}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}

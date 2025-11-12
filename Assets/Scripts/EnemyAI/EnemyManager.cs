@@ -7,9 +7,10 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject basicEnemyPrefab;
     [SerializeField] private Transform planetTransform;
     [SerializeField] private Transform playerRootTransform;
+    [HideInInspector] public WinCondition winCondition;
 
     [Header("Base Settings")]
-    [SerializeField] private int initialEnemyCount;
+    public int initialEnemyCount;
     [SerializeField] private float spawnRadius;
     [SerializeField] private float spawnHeightMin;
     [SerializeField] private float spawnHeightMax;

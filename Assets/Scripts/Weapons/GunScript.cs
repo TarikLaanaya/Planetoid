@@ -4,6 +4,8 @@ using UnityEngine.Audio;
 
 public class GunScript : MonoBehaviour
 {
+    [SerializeField] private float maxDistanceForBullets = 100f;
+    [SerializeField] LayerMask enemyLayer;
     [SerializeField] private PlayerVerticalAim playerVerticalAim;
     [SerializeField] private Camera playerCam;
 
@@ -178,6 +180,7 @@ public class GunScript : MonoBehaviour
         bullet.transform.localScale *= BulletScale;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = dir * BulletSpeed;
+        bullet.transform.rotation = Quaternion.LookRotation(dir);
         bullet.tag = "ChargeBullet";
         bullet.GetComponent<Bullet>().damage = Mathf.Lerp(0f, 25f, BulletScale);
         Destroy(bullet, 6.7f);
@@ -200,20 +203,13 @@ public class GunScript : MonoBehaviour
     {
         // --- Vertical Aim Logic --- ///
 
-        // Multiply the position of the crosshair by the desired sensitivity
-        //float pitch = playerVerticalAim.crosshairTransform.anchoredPosition.y * shotPitchSens;
-
-        // Rotate pitch amount around the "X axis" and then multiply by forward to get the desired direction
-        //Vector3 dir = Quaternion.AngleAxis(-pitch, playerCam.transform.right) * playerCam.transform.forward;
-
-
         Vector3 crosshairScreenPosition = playerCam.WorldToScreenPoint(playerVerticalAim.crosshairTransform.position);
 
         Ray ray = playerCam.ScreenPointToRay(crosshairScreenPosition);
         RaycastHit hit;
         Vector3 rayTargetPoint;
 
-        if (Physics.Raycast(ray, out hit, 999f))
+        if (Physics.Raycast(ray, out hit, 999, enemyLayer, QueryTriggerInteraction.Collide))
         {
             if (hit.collider.tag == "Enemy")
             {
@@ -221,12 +217,12 @@ public class GunScript : MonoBehaviour
             }
             else
             {
-                rayTargetPoint = ray.GetPoint(999f);
+                rayTargetPoint = ray.GetPoint(maxDistanceForBullets);
             }
         }
         else
         {
-            rayTargetPoint = ray.GetPoint(999f);
+            rayTargetPoint = ray.GetPoint(maxDistanceForBullets);
         }
 
         Vector3 dir = (rayTargetPoint - BulletSpawn.position).normalized;
