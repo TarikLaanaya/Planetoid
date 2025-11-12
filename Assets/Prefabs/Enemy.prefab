@@ -140,8 +140,8 @@ MonoBehaviour:
   distanceBeforeShoot: 30
   BulletSpawn: {fileID: 6463461828040826643}
   BulletPrefab: {fileID: 2376115530242943323, guid: dd756535ef10ec243a82edfa261a5d0a, type: 3}
-  BulletSpeed: 20
-  TimeBetweenShots: 0.5
+  BulletSpeed: 40
+  TimeBetweenShots: 0.4
   gatlingClip: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
 --- !u!82 &8612804444211277727
 AudioSource:
