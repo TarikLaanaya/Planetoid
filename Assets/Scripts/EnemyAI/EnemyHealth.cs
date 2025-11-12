@@ -8,15 +8,13 @@ public class EnemyHealth : MonoBehaviour
 
     private float health;
     [SerializeField] GameObject enemyParent;
+    private EnemyManager enemyManager;
 
     void Start()
     {
         health = maxHealth;
-    }
 
-    void Update()
-    {
-        
+        enemyManager = enemyParent.GetComponent<BasicEnemyBrain>().enemyBaseGameOBJ.GetComponent<EnemyManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -58,6 +56,8 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         Instantiate(explosionPrefab, transform.position, transform.rotation);
+
+        enemyManager.winCondition.EnemyDestroyed();
         
         Destroy(enemyParent);
     }
