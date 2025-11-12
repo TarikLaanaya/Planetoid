@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float accelDeccel;
     [SerializeField] private float rotationDampening;
     [SerializeField] private Transform playerModelTransform;
+
+    private InputManager inputManager;
     
     private Rigidbody rb;
     Vector3 moveDirection;
@@ -19,12 +21,13 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        inputManager = GetComponent<InputManager>();
     }
 
     void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
+        float moveX = inputManager.moveX;
+        float moveZ = inputManager.moveZ;
 
         moveDirection = transform.right * moveX + transform.forward * moveZ; // Calculate movement direction based on player orientation
 
@@ -33,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX); // Rotate player root based on mouse movement
 
         // Check if boost button down
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (inputManager.boostButtonHeld)
         {
             boosting = true;
             SetParticleSystemActive(true);

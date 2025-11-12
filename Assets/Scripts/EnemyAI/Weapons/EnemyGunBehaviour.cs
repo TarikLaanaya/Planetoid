@@ -41,7 +41,6 @@ public class EnemyGunBehaviour : MonoBehaviour
         {
             GameObject bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            bullet.GetComponent<PlanetGravitySim>().planetTransform = basicEnemyBrain.planetTransform;
 
             Vector3 dirToPlayer = basicEnemyBrain.playerRootTransform.position - BulletSpawn.position;
             BulletSpawn.rotation = Quaternion.LookRotation(dirToPlayer);
