@@ -22,6 +22,7 @@ public class WinCondition : MonoBehaviour
         Minigun.enabled = true;
         ChargeGun.enabled = true;
         Missile.enabled = true;
+        MissileGrey.enabled = true;
         foreach (GameObject enemyBase in enemyBases)
         {
             EnemyManager enemyManager = enemyBase.GetComponent<EnemyManager>();
@@ -47,6 +48,7 @@ public class WinCondition : MonoBehaviour
             Minigun.enabled = false;
             ChargeGun.enabled = false;
             Missile.enabled = false;
+            MissileGrey.enabled = false;
             Debug.Log("WIN");
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
