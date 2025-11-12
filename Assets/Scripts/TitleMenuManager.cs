@@ -12,7 +12,7 @@ public class TitleMenuManager : MonoBehaviour
         PlayButton.onClick.AddListener(OnPlayButtonClicked);
         QuitButton.onClick.AddListener(OnQuitButtonClicked);
     }
-    private void OnPlayButtonClicked()
+    public void OnPlayButtonClicked()
     {
         SceneManager.LoadScene("ArtTests");
     }
