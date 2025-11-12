@@ -7,9 +7,8 @@ public class PlayerVerticalAim : MonoBehaviour
     public float lowerLimit = -200f;
     public float moveSpeed = 10f;
 
-    private float targetHorizontalOffset = 0f;
     private float currentHorizontalOffset = 0f;
-    public float horizontalMovement = 50f; // UI units to move left/right
+    public float horizontalMovement = 700f; // UI units to move left/right
     public float horizontalSmoothSpeed = 5f;
     public float smoothSpeed = 0.1f;
 

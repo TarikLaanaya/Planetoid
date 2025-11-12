@@ -29,7 +29,7 @@ public class EnemyHealth : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Missile":
-                TakeDamage(damage);
+                TakeDamage(100);
                 Destroy(other.gameObject);
                 break;
 

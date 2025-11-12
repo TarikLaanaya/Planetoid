@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public Transform starship;
-    public Vector3 baseOffset = new Vector3(0, 3, -6);
+    public Vector3 baseOffset = new Vector3();
     public float smoothSpeed = 0.1f;
     public float speedOffsetMultiplier = 2f;
 

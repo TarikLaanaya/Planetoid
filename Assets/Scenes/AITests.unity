@@ -150,6 +150,29 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.0219
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &299848879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5282321408415767616, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+  m_PrefabInstance: {fileID: 7138280122099168215}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &299848884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299848879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3045cb69c76487c48903cc5e1f30de52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starship: {fileID: 2066888063}
+  baseOffset: {x: 0, y: 1.38, z: -3.38}
+  smoothSpeed: 0.1
+  speedOffsetMultiplier: 0.25
+  horizontalMovement: 0.25
+  horizontalSmoothSpeed: 5
 --- !u!1 &667288098
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,6 +805,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2066888063 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4985513091207706937, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+  m_PrefabInstance: {fileID: 7138280122099168215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7138280122099168215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -801,6 +829,22 @@ PrefabInstance:
     - target: {fileID: 905538207841605018, guid: c116b13fb49065448b9c520f3974541a, type: 3}
       propertyPath: crosshairTargetDistance
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058916618232164023, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058916618232164023, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058916618232164023, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 2876041062157389320, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      propertyPath: horizontalMovement
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 3278655056885808246, guid: c116b13fb49065448b9c520f3974541a, type: 3}
       propertyPath: planetTransform
@@ -857,7 +901,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5282321408415767616, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 299848884}
   m_SourcePrefab: {fileID: 100100000, guid: c116b13fb49065448b9c520f3974541a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
