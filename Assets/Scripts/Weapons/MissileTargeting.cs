@@ -20,6 +20,10 @@ public class MissileTargeting : MonoBehaviour
 
     public HUDManager hudManager;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip MissileLaunch;
+    [SerializeField] private AudioSource MissileAudioSource;
+
     void Update()
     { 
         Cooldown -= Time.deltaTime;
@@ -37,6 +41,7 @@ public class MissileTargeting : MonoBehaviour
                 {
                     Debug.Log("Missile Fired");
                     ShootMissile();
+                    MissileAudioSource.PlayOneShot(MissileLaunch);
                     Cooldown = MissileCooldown;
                     targetedEnemy = null;
                     LockedOn = false;
@@ -131,5 +136,7 @@ public class MissileTargeting : MonoBehaviour
         hudManager.MissileCooldown();
         missile.GetComponent<HomingMissile>().target = targetedEnemy.gameObject.transform;
     }
+
+
 
 }
