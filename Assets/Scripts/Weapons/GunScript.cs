@@ -57,6 +57,7 @@ public class GunScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ChargeShot = false;
+            gunAudioSource.Stop();
             Debug.Log("Gatling Mode");
 
         }
