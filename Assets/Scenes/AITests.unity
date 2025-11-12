@@ -183,6 +183,7 @@ MonoBehaviour:
   basicEnemyPrefab: {fileID: 3780582236066830637, guid: 4f0f8477691a7e740b3408e1b1a0233b, type: 3}
   planetTransform: {fileID: 187782686}
   playerRootTransform: {fileID: 690051129}
+  winCondition: {fileID: 0}
   initialEnemyCount: 4
   spawnRadius: 10
   spawnHeightMin: 5
@@ -798,6 +799,18 @@ PrefabInstance:
       propertyPath: planetTransform
       value: 
       objectReference: {fileID: 187782686}
+    - target: {fileID: 2058916618232164023, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058916618232164023, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058916618232164023, guid: c116b13fb49065448b9c520f3974541a, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 3278655056885808246, guid: c116b13fb49065448b9c520f3974541a, type: 3}
       propertyPath: planetTransform
       value: 
